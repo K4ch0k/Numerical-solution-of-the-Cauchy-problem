@@ -16,7 +16,6 @@ double Exact(double x)	// y(x)
 
 int main(void)
 {
-	system("title Lab2.1 #24");
 	SetConsoleCP(65001);
 	SetConsoleOutputCP(65001);
 	double a, b, h, x, y[n];	// Основные переменные
@@ -27,7 +26,7 @@ int main(void)
 	y[0] = 1;	//	Начальное условие
 	h = (b - a) / (n - 1);	//	Шаг
 	printf("Отрезок: [%3.3f, %3.3f]\nШаг: %f\n\n", a, b, h);
-	
+
 	for (int i = 0; i < n - 1; i++) // Метод Рунге - Кутты
 	{
 		x = i * h;
@@ -37,14 +36,14 @@ int main(void)
 		s4 = h * Approx(x + h, y[i] + s3);
 		y[i + 1] = y[i] + (s1 + 2 * s2 + 2 * s3 + s4) / 6;
 	}
-	
+
 	// Сравнение y' и y(x)
 	for (int i = 0; i < n; i++)
 	{
 		x = i * h;
-		printf("%3d\\\t x = %f \t\t y' = %f  \t\t y(x) = % f\n", i + 1, x, y[i], Exact(x));
+		printf("%3d\\\t x = %f \t\t y' = %f  \t\t y(x) = %f\t\tdiff: %.10f\n", i + 1, x, y[i], Exact(x), fabs(y[i] - Exact(x)));
 	}
-	
+
 	system("pause");
 	return 0;
 }
